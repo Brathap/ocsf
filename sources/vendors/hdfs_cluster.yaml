@@ -1,0 +1,27 @@
+# Hadoop Distributed File System (HDFS) Daemon Pack
+metadata:
+  vendor: "Apache"
+  product: "Hadoop HDFS"
+  version: "2.x/3.x"
+  priority: 110
+  description: "HDFS DataNode and NameSystem cluster operations log."
+
+detection:
+  match_regex:
+    - "^\\d{6}\\s+\\d{6}\\s+\\d+\\s+(?:INFO|WARN|ERROR)\\s+dfs\\."
+
+parser:
+  type: "regex"
+  pattern: "^(?P<date>\\d{6})\\s+(?P<time>\\d{6})\\s+(?P<pid>\\d+)\\s+(?P<severity>INFO|WARN|ERROR)\\s+(?P<component>[^:]+):\\s+(?P<message>.*)"
+
+ocsf:
+  class_uid: 1001
+  category_name: "System Activity"
+  activity_name: "File System Activity"
+
+mappings:
+  "severity": "severity"
+  "status_detail": "message"
+  "file.name": "component"
+  "activity_name": "severity"
+  "time": "date"

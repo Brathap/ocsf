@@ -1,0 +1,2 @@
+[APPGW-01] 2026-10-05T08:00:00Z | STATUS:ALLOW | client_addr:10.1.2.3:55123 | server_addr:172.16.0.4:80 | transport:TCP | rule:PERMIT_WEB
+[APPGW-01] 2026-10-05T08:00:01Z | STATUS:DENY | client_addr:10.1.2.4:55124 | server_addr:172.16.0.5:443 | transport:TCP | rule:DENY_DEFAULT

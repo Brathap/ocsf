@@ -1,0 +1,2 @@
+[CORRUPT_NULL_BYTE\x00\xff] random binary noise <<<>>> &&& %%%
+[MALFORMED_HEADER] ::INVALID_IP::999.999.999.999::port=-1:::timestamp=NOT_A_TIME

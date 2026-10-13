@@ -1,0 +1,27 @@
+# Linux OpenSSH Authentication Pack
+metadata:
+  vendor: "Linux"
+  product: "OpenSSH"
+  version: "8.x"
+  priority: 115
+  description: "Standard Linux SSHD authentication logs (RFC 3164 syslog format)."
+
+detection:
+  match_regex:
+    - "sshd\\[\\d+\\]:"
+
+parser:
+  type: "regex"
+  pattern: "sshd\\[\\d+\\]:\\s+(?P<auth_status>Accepted|Failed|Invalid user|Connection closed by|Received disconnect from|input_userauth_request:|reverse mapping checking|pam_unix)?(?:\\s*(?:password for (?:invalid user )?|publickey for )?(?P<user_name>\\w+)?(?: from | by )?(?P<src_ip>[0-9.]+)?(?: port )?(?P<src_port>\\d+)?)?(?P<rest>.*)"
+
+ocsf:
+  class_uid: 3002
+  category_name: "Identity & Access Management"
+  activity_name: "User Authentication"
+
+mappings:
+  "user.name": "user_name"
+  "src_endpoint.ip": "src_ip"
+  "src_endpoint.port": "src_port"
+  "status": "auth_status"
+  "status_detail": "rest"

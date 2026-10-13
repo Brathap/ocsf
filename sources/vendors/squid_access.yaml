@@ -1,0 +1,29 @@
+# Squid Web Proxy Native Access Log Pack
+metadata:
+  vendor: "Squid"
+  product: "Squid Proxy"
+  version: "4.x/5.x"
+  priority: 120
+  description: "Squid native access log format (timestamp duration client_address result_code/status bytes request_method URL user)."
+
+detection:
+  match_regex:
+    - "^\\d{9,10}\\.\\d{3}\\s+\\d+\\s+[0-9a-fA-F.:]+\\s+TCP_"
+    - "^\\d{9,10}\\.\\d{3}\\s+\\d+\\s+[0-9a-fA-F.:]+\\s+UDP_"
+
+parser:
+  type: "regex"
+  pattern: "^(?P<ts>\\d+\\.\\d+)\\s+(?P<duration>\\d+)\\s+(?P<src_ip>[0-9a-fA-F.:]+)\\s+(?P<cache_code>\\w+)/(?P<status_code>\\d+)\\s+(?P<bytes>\\d+)\\s+(?P<method>\\w+)\\s+(?P<url>\\S+)\\s+(?P<user>\\S+)"
+
+ocsf:
+  class_uid: 4001
+  category_name: "Network Activity"
+  activity_name: "HTTP Proxy Request"
+
+mappings:
+  "src_endpoint.ip": "src_ip"
+  "http_request.method": "method"
+  "http_request.url": "url"
+  "http_response.status_code": "status_code"
+  "user.name": "user"
+  "time": "ts"

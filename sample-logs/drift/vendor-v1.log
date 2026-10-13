@@ -1,0 +1,2 @@
+2026-10-05 08:00:00 APPGW-01 action=allow src=10.1.2.3 dst=172.16.0.4 proto=TCP
+2026-10-05 08:00:01 APPGW-01 action=allow src=10.1.2.4 dst=172.16.0.5 proto=TCP

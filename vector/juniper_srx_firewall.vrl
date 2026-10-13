@@ -1,0 +1,19 @@
+# Vector Remap Language (VRL) Parser: Juniper_SRX_Firewall
+# Generated autonomously by ULPF AI Mapper Studio for firewall (SYSLOG)
+# Timestamp: 2026-10-13T14:15:22.828784+00:00
+
+raw_msg = string!(.message)
+sanitized_msg = replace(raw_msg, r'\b\d{4}[ -]?\d{4}[ -]?\d{4}\b', "[REDACTED_AADHAAR]")
+
+# Schema Projections into OCSF Standard
+.normalized_data.metadata.version = "1.1.0"
+.normalized_data.metadata.source_type = "firewall"
+.normalized_data.metadata.wire_format = "SYSLOG"
+.normalized_data.src_endpoint.ip = .source_address
+.normalized_data.dst_endpoint.ip = .destination_address
+.normalized_data.activity_name = .action
+
+# Compliance & Traceability envelope
+.traceability.raw_sha256 = sha256(raw_msg)
+.traceability.raw_base64 = encode_base64(raw_msg)
+.traceability.sanitized_raw = sanitized_msg

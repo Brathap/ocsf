@@ -1,0 +1,5 @@
+%ASA-4-106023: Deny udp src outside:192.168.1.100/5353 dst inside:10.0.0.15/5353 by access-group "acl_outside" [0x0, 0x0]
+%ASA-6-302013: Built inbound TCP connection 987654 for outside:198.51.100.4/443 (198.51.100.4/443) to inside:10.0.0.50/54321 (10.0.0.50/54321)
+%ASA-6-302014: Teardown inbound TCP connection 987654 for outside:198.51.100.4/443 to inside:10.0.0.50/54321 duration 0:00:30 bytes 4096 TCP FINs
+%ASA-5-111008: User 'admin' executed the 'show running-config' command.
+%ASA-3-710003: TCP access denied by ACL from 203.0.113.195/49152 to outside:192.168.1.1/22

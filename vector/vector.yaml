@@ -1,0 +1,160 @@
+data_dir: "/tmp/vector"
+
+sources:
+  syslog_ingest:
+    type: syslog
+    mode: udp
+    address: "0.0.0.0:5140"
+    buffer:
+      type: disk
+      max_size: 2147483648  # 2,048 MB Ring Buffer for Zero Drop
+
+enrichment_tables:
+  threat_intel:
+    type: file
+    file:
+      path: "backend/threat_intel.csv"
+      encoding:
+        type: csv
+
+transforms:
+  process_and_normalize:
+    type: remap
+    inputs:
+      - syslog_ingest
+    source: |
+      # 1. Forensic Integrity (Lossless wire data capture)
+      raw_msg_str = to_string!(.message)
+      raw_msg_b64 = encode_base64(raw_msg_str)
+      msg_hash = sha2(raw_msg_str)
+      
+      # 2. Named Entity PII Redaction (Aadhaar, PAN, Mobile, Email, IMEI)
+      msg_redacted = replace(raw_msg_str, r'(?<!\d)[2-9]\d{3}[ -]?\d{4}[ -]?\d{4}(?!\d)', "[REDACTED_AADHAAR]")
+      msg_redacted = replace(msg_redacted, r'\b[A-Z]{5}[0-9]{4}[A-Z]{1}\b', "[REDACTED_PAN]")
+      msg_redacted = replace(msg_redacted, r'(?<!\d)(?:(?:\+91[\-\s]?|91[\-\s]?|0)?[6-9]\d{9})(?!\d)', "[REDACTED_MOBILE]")
+      msg_redacted = replace(msg_redacted, r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b', "[REDACTED_EMAIL]")
+      sanitized_message = msg_redacted
+      has_pii = sanitized_message != raw_msg_str
+      
+      # 3. Dynamic IP Extraction (Source & Destination IP discovery)
+      src_ip = "127.0.0.1"
+      dst_ip = "10.0.0.1"
+      
+      # Try Cisco ASA pattern
+      cisco_match, c_err = parse_regex(sanitized_message, r'src [^:]+:(?P<src>[^/]+)/\d+ dst [^:]+:(?P<dst>[^/]+)/\d+')
+      if c_err == null && cisco_match != null {
+          src_ip = cisco_match.src
+          dst_ip = cisco_match.dst
+      } else {
+          # Try CEF pattern
+          cef_match, cef_err = parse_regex(sanitized_message, r'src=(?P<src>[^\s]+)\s+dst=(?P<dst>[^\s]+)')
+          if cef_err == null && cef_match != null {
+              src_ip = cef_match.src
+              dst_ip = cef_match.dst
+          } else {
+              # Fallback single IP regex
+              ip_match, ip_err = parse_regex(sanitized_message, r'(?P<ip>\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})')
+              if ip_err == null && ip_match != null {
+                  src_ip = ip_match.ip
+              }
+          }
+      }
+      
+      # 4. Threat Intel Enrichment
+      is_malicious = false
+      threat_actor = "None"
+      threat_severity = "Benign"
+      
+      enrichment_record, err = get_enrichment_table_record("threat_intel", {"src_ip": src_ip})
+      if err == null && enrichment_record != null {
+          is_malicious = true
+          threat_actor = enrichment_record.threat_group
+          threat_severity = enrichment_record.severity
+      }
+      
+      # 5. OCSF Classification & Severity Scoring
+      ocsf_class_uid = 4001
+      category_name = "Network Activity"
+      activity_name = "Traffic Flow"
+      severity_id = 1
+      severity_name = "Informational"
+      
+      lower_msg = downcase(sanitized_message)
+      if contains(lower_msg, "denied") || contains(lower_msg, "blocked") || contains(lower_msg, "failed") {
+          severity_id = 4
+          severity_name = "High"
+          activity_name = "Security Block / Authentication Failure"
+      }
+      if contains(lower_msg, "sshd") || contains(lower_msg, "password") || contains(lower_msg, "login") {
+          ocsf_class_uid = 3002
+          category_name = "Identity & Access Management"
+          activity_name = "User Authentication"
+      }
+      if contains(lower_msg, "cef:") || contains(lower_msg, "imperva") || contains(lower_msg, "sqli") || contains(lower_msg, "waf") {
+          ocsf_class_uid = 2001
+          category_name = "Security Finding"
+          activity_name = "WAF Signature Inspection"
+      }
+      if is_malicious {
+          severity_id = 5
+          severity_name = "Critical"
+      }
+      
+      # 6. Build Standardized OCSF v1.1.0 Payload
+      normalized = {}
+      normalized.metadata = {
+          "version": "1.1.0",
+          "product": {
+              "vendor_name": "ULPF Gateway",
+              "name": "Enterprise Universal Parser"
+          }
+      }
+      normalized.class_uid = ocsf_class_uid
+      normalized.category_name = category_name
+      normalized.activity_name = activity_name
+      normalized.severity_id = severity_id
+      normalized.severity = severity_name
+      normalized.src_endpoint = { "ip": src_ip }
+      normalized.dst_endpoint = { "ip": dst_ip }
+      normalized.enrichment = {
+          "is_malicious": is_malicious,
+          "threat_actor": threat_actor,
+          "threat_level": threat_severity
+      }
+      normalized.compliance = {
+          "pii_redacted": has_pii,
+          "standard": "OCSF-1.1.0"
+      }
+      
+      # 7. Final Lossless Traceability Envelope
+      . = {}
+      .traceability = {
+          "raw_sha256": msg_hash,
+          "raw_base64": raw_msg_b64,
+          "ingest_timestamp": now(),
+          "sanitized_raw": sanitized_message,
+          "raw_hash": msg_hash,
+          "raw_log_base64": raw_msg_b64,
+          "redacted_payload": sanitized_message
+      }
+      .normalized_data = normalized
+
+sinks:
+  local_archive:
+    type: file
+    inputs: 
+      - process_and_normalize
+    path: "storage/sih_lossless_archive.json"
+    encoding:
+      codec: json
+
+  fastapi_backend:
+    type: http
+    inputs:
+      - process_and_normalize
+    uri: "http://127.0.0.1:8000/api/live-logs"
+    request:
+      headers:
+        X-API-Key: "ulpf_admin_secret_key_2026"
+    encoding:
+      codec: json

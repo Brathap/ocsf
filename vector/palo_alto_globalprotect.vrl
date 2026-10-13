@@ -1,0 +1,20 @@
+# Vector Remap Language (VRL) Parser: Palo_Alto_GlobalProtect
+# Generated autonomously by ULPF AI Mapper Studio for vpn_gateway (CEF)
+# Timestamp: 2026-09-24T18:05:33.039098+00:00
+
+raw_msg = string!(.message)
+sanitized_msg = replace(raw_msg, r'\b\d{12}\b', "[REDACTED_AADHAAR]")
+
+# Schema Projections into OCSF Standard
+.normalized_data.metadata.version = "1.1.0"
+.normalized_data.metadata.source_type = "vpn_gateway"
+.normalized_data.metadata.wire_format = "CEF"
+.normalized_data.src_endpoint.ip = .src
+.normalized_data.dst_endpoint.ip = .dst
+.normalized_data.actor.user.name = .suser
+.normalized_data.activity_name = .act
+
+# Compliance & Traceability envelope
+.traceability.raw_sha256 = sha256(raw_msg)
+.traceability.raw_base64 = encode_base64(raw_msg)
+.traceability.sanitized_raw = sanitized_msg

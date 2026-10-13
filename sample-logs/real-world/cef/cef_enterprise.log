@@ -1,0 +1,3 @@
+CEF:0|Imperva|SecureSphere|14.4|SQLi|SQL Injection Attempt|8|src=198.51.100.88 dst=10.0.0.25 spt=60112 dpt=443 act=blocked request=/api/user?id=1' OR '1'='1
+CEF:0|CheckPoint|VPN-1 & FireWall-1|CheckPoint|drop|Drop|Unknown|src=198.51.100.10 dst=192.0.2.20 spt=44123 dpt=80 proto=TCP
+CEF:0|Trend Micro|Deep Security|20.0|2000000|Integrity Monitoring Rule Triggered|5|src=10.0.0.99 dst=10.0.0.1 msg=File /bin/login modified

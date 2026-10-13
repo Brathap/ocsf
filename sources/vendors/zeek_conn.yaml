@@ -1,0 +1,41 @@
+# Zeek Conn TSV Network Security Monitor Pack
+metadata:
+  vendor: "Zeek Project"
+  product: "Zeek conn"
+  version: "v5.x/v6.x"
+  priority: 125
+  description: "Zeek connection summary TSV telemetry based on standard #fields header format."
+
+detection:
+  match_regex:
+    - "^\\d+\\.\\d+\\t\\w+\\t[0-9a-fA-F.:]+\\t\\d+\\t[0-9a-fA-F.:]+\\t\\d+\\t(?:tcp|udp|icmp)"
+    - "#fields\\tts\\tuid\\tid.orig_h\\tid.orig_p\\tid.resp_h\\tid.resp_p\\tproto"
+
+parser:
+  type: "tsv"
+  fields:
+    - "ts"
+    - "uid"
+    - "id_orig_h"
+    - "id_orig_p"
+    - "id_resp_h"
+    - "id_resp_p"
+    - "proto"
+    - "service"
+    - "duration"
+    - "orig_bytes"
+    - "resp_bytes"
+    - "conn_state"
+
+ocsf:
+  class_uid: 4001
+  category_name: "Network Activity"
+  activity_name: "Network Connection"
+
+mappings:
+  "src_endpoint.ip": "id_orig_h"
+  "src_endpoint.port": "id_orig_p"
+  "dst_endpoint.ip": "id_resp_h"
+  "dst_endpoint.port": "id_resp_p"
+  "connection_info.protocol_name": "proto"
+  "time": "ts"

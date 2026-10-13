@@ -1,0 +1,18 @@
+# Vector Remap Language (VRL) Parser: TestFirewall
+# Generated autonomously by ULPF AI Mapper Studio for firewall_asa (SYSLOG)
+# Timestamp: 2026-09-24T06:33:30.744045+00:00
+
+raw_msg = string!(.message)
+sanitized_msg = replace(raw_msg, r'\b\d{12}\b', "[REDACTED_AADHAAR]")
+
+# Schema Projections into OCSF Standard
+.normalized_data.metadata.version = "1.1.0"
+.normalized_data.metadata.source_type = "firewall_asa"
+.normalized_data.metadata.wire_format = "SYSLOG"
+.normalized_data.src_endpoint.ip = .src
+.normalized_data.dst_endpoint.ip = .dst
+
+# Compliance & Traceability envelope
+.traceability.raw_sha256 = sha256(raw_msg)
+.traceability.raw_base64 = encode_base64(raw_msg)
+.traceability.sanitized_raw = sanitized_msg

@@ -1,0 +1,2 @@
+CEF:0|CheckPoint|VPN-1 & FireWall-1|CheckPoint|drop|Drop|Unknown|src=198.51.100.10 dst=192.0.2.20 spt=44123 dpt=80 proto=TCP
+CEF:0|Symantec|Endpoint Protection|14.3|1|Security Event|High|src=10.20.30.40 dst=172.217.16.206 spt=51234 dpt=443 proto=TCP

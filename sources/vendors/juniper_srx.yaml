@@ -1,0 +1,30 @@
+# Juniper SRX Services Gateway (RFC 5424 Structured Data) Pack
+metadata:
+  vendor: "Juniper"
+  product: "SRX"
+  version: "Junos OS 21.x"
+  priority: 130
+  description: "Juniper SRX RFC 5424 structured data security logs with RT_FLOW session events."
+
+detection:
+  match_regex:
+    - "RT_FLOW_SESSION_CREATE"
+    - "RT_FLOW_SESSION_CLOSE"
+    - "RT_FLOW_SESSION_DENY"
+    - "RT_FLOW:"
+
+parser:
+  type: "regex"
+  pattern: "RT_FLOW_SESSION_(?P<flow_action>CREATE|CLOSE|DENY):\\s+(?:\\[[^\\]]+\\]\\s+)?(?P<src_ip>[0-9a-fA-F.:]+)/(?P<src_port>\\d+)\\s+->\\s+(?P<dst_ip>[0-9a-fA-F.:]+)/(?P<dst_port>\\d+)"
+
+ocsf:
+  class_uid: 4001
+  category_name: "Network Activity"
+  activity_name: "Traffic Flow"
+
+mappings:
+  "src_endpoint.ip": "src_ip"
+  "src_endpoint.port": "src_port"
+  "dst_endpoint.ip": "dst_ip"
+  "dst_endpoint.port": "dst_port"
+  "activity_name": "flow_action"

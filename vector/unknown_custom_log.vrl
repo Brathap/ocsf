@@ -1,0 +1,21 @@
+# Vector Remap Language (VRL) Parser: Unknown_Custom_Log
+# Generated autonomously by ULPF AI Mapper Studio for generic_system (KEY_VALUE)
+# Timestamp: 2026-09-29T05:43:49.619275+00:00
+
+raw_msg = string!(.message)
+sanitized_msg = replace(raw_msg, r'\b\d{4}[ -]?\d{4}[ -]?\d{4}\b', "[REDACTED_AADHAAR]")
+
+# Schema Projections into OCSF Standard
+.normalized_data.metadata.version = "1.1.0"
+.normalized_data.metadata.source_type = "generic_system"
+.normalized_data.metadata.wire_format = "KEY_VALUE"
+.normalized_data.src_endpoint.ip = .src_ip
+.normalized_data.dst_endpoint.ip = .dst_ip
+.normalized_data.activity_name = .action
+.normalized_data.category_name = .category
+.normalized_data.severity = .severity
+
+# Compliance & Traceability envelope
+.traceability.raw_sha256 = sha256(raw_msg)
+.traceability.raw_base64 = encode_base64(raw_msg)
+.traceability.sanitized_raw = sanitized_msg

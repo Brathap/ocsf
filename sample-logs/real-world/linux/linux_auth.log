@@ -1,0 +1,4 @@
+Oct  5 09:12:00 edge-router sshd[28491]: Failed password for invalid user admin from 192.168.1.99 port 48120 ssh2
+Oct  5 09:12:05 edge-router sshd[28492]: Accepted publickey for ubuntu from 10.0.0.5 port 52140 ssh2: RSA SHA256:abc123xyz
+Oct  5 09:14:10 webserver sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/usr/bin/apt-get update
+Oct  5 09:15:22 authserver systemd-logind[781]: New session 42 of user root.

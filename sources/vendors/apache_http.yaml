@@ -1,0 +1,28 @@
+# Apache HTTP Web Server Error & Access Pack
+metadata:
+  vendor: "Apache"
+  product: "HTTP Server"
+  version: "2.4"
+  priority: 110
+  description: "Standard Apache HTTP server error and access logs."
+
+detection:
+  match_regex:
+    - "^\\[[A-Z][a-z]{2}\\s+[A-Z][a-z]{2}\\s+\\d+\\s+\\d+:\\d+:\\d+\\s+\\d+\\]\\s+\\[(?:notice|error|warn|crit)\\]"
+    - "^\\[\\w+\\s+\\w+\\s+\\d+\\s+\\d+:\\d+:\\d+\\.\\d+\\s+\\d+\\]\\s+\\["
+
+parser:
+  type: "regex"
+  pattern: "^\\[(?P<log_time>[^\\]]+)\\]\\s+\\[(?P<log_level>[^\\]]+)\\]\\s+(?:(?:\\[client\\s+(?P<client_ip>[0-9a-fA-F.:]+)(?::(?P<client_port>\\d+))?\\]\\s+)?(?P<message>.*))"
+
+ocsf:
+  class_uid: 6001
+  category_name: "Application Activity"
+  activity_name: "Web Server Log"
+
+mappings:
+  "src_endpoint.ip": "client_ip"
+  "src_endpoint.port": "client_port"
+  "severity": "log_level"
+  "status_detail": "message"
+  "time": "log_time"

@@ -1,0 +1,30 @@
+# SonicWall Enhanced SonicOS Firewall Pack
+metadata:
+  vendor: "SonicWall"
+  product: "SonicOS"
+  version: "7.x"
+  priority: 125
+  description: "SonicWall key-value formatted perimeter firewall logs."
+
+detection:
+  match_regex:
+    - "sn=[A-Z0-9]+\\s+time="
+    - "fw=[0-9.]+\\s+pri="
+    - "SonicWALL"
+
+parser:
+  type: "kv"
+
+ocsf:
+  class_uid: 4001
+  category_name: "Network Activity"
+  activity_name: "Firewall Rule"
+
+mappings:
+  "src_endpoint.ip": "src"
+  "src_endpoint.port": "spt"
+  "dst_endpoint.ip": "dst"
+  "dst_endpoint.port": "dpt"
+  "connection_info.protocol_name": "proto"
+  "activity_name": "msg"
+  "device.name": "fw"

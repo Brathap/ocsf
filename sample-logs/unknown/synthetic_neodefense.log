@@ -1,0 +1,2 @@
+2026-10-05T09:30:15Z NEODEFENSE-GW01 evt=PACKET_DROP client_ip=203.0.113.88 s_port=59021 srv_ip=198.51.100.4 d_port=8080 proto=TCP app=WEB msg="Geoblocked IP range"
+2026-10-05T09:30:16Z NEODEFENSE-GW01 evt=AUTH_FAIL client_ip=198.51.100.99 s_port=44201 srv_ip=198.51.100.4 d_port=22 proto=TCP app=SSH msg="Bad token"

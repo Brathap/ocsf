@@ -1,0 +1,8 @@
+src_ip,threat_group,severity,mitre_id
+198.51.100.23,APT29,High,T1133
+203.0.113.84,LazarusGroup,Critical,T1110.001
+192.0.2.145,Sandworm,High,T1498
+103.21.244.12,VoltTyphoon,Medium,T1078
+198.51.100.99,LockBit,High,T1486
+203.0.113.111,CobaltStrike_C2,Critical,T1071.001
+

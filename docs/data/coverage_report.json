@@ -1,0 +1,215 @@
+{
+  "Loghub OpenSSH 2k": {
+    "total_records": 2000,
+    "full_parsed": 1368,
+    "partial_parsed": 632,
+    "unparsed": 0,
+    "emitted_ocsf": 2000,
+    "parsed_pct": 68.4,
+    "partial_pct": 31.6,
+    "unparsed_pct": 0.0,
+    "emitted_pct": 100.0,
+    "top_misses": [
+      {
+        "pattern": "[linux_openssh_8.x] Partial extraction: Dec 10 06:55:46 LabSZ sshd[24200]: pam_unix(sshd:auth): chec",
+        "count": 1,
+        "sample": "Dec 10 06:55:46 LabSZ sshd[24200]: pam_unix(sshd:auth): check pass; user unknown"
+      },
+      {
+        "pattern": "[linux_openssh_8.x] Partial extraction: Dec 10 06:55:46 LabSZ sshd[24200]: pam_unix(sshd:auth): auth",
+        "count": 1,
+        "sample": "Dec 10 06:55:46 LabSZ sshd[24200]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid="
+      },
+      {
+        "pattern": "[linux_openssh_8.x] Partial extraction: Dec 10 07:07:38 LabSZ sshd[24206]: pam_unix(sshd:auth): chec",
+        "count": 1,
+        "sample": "Dec 10 07:07:38 LabSZ sshd[24206]: pam_unix(sshd:auth): check pass; user unknown"
+      },
+      {
+        "pattern": "[linux_openssh_8.x] Partial extraction: Dec 10 07:07:38 LabSZ sshd[24206]: pam_unix(sshd:auth): auth",
+        "count": 1,
+        "sample": "Dec 10 07:07:38 LabSZ sshd[24206]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid="
+      },
+      {
+        "pattern": "[linux_openssh_8.x] Partial extraction: Dec 10 07:08:28 LabSZ sshd[24208]: pam_unix(sshd:auth): chec",
+        "count": 1,
+        "sample": "Dec 10 07:08:28 LabSZ sshd[24208]: pam_unix(sshd:auth): check pass; user unknown"
+      },
+      {
+        "pattern": "[linux_openssh_8.x] Partial extraction: Dec 10 07:08:28 LabSZ sshd[24208]: pam_unix(sshd:auth): auth",
+        "count": 1,
+        "sample": "Dec 10 07:08:28 LabSZ sshd[24208]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid="
+      },
+      {
+        "pattern": "[linux_openssh_8.x] Partial extraction: Dec 10 07:11:42 LabSZ sshd[24224]: pam_unix(sshd:auth): chec",
+        "count": 1,
+        "sample": "Dec 10 07:11:42 LabSZ sshd[24224]: pam_unix(sshd:auth): check pass; user unknown"
+      },
+      {
+        "pattern": "[linux_openssh_8.x] Partial extraction: Dec 10 07:11:42 LabSZ sshd[24224]: pam_unix(sshd:auth): auth",
+        "count": 1,
+        "sample": "Dec 10 07:11:42 LabSZ sshd[24224]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid="
+      },
+      {
+        "pattern": "[linux_openssh_8.x] Partial extraction: Dec 10 07:13:31 LabSZ sshd[24227]: pam_unix(sshd:auth): auth",
+        "count": 1,
+        "sample": "Dec 10 07:13:31 LabSZ sshd[24227]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid="
+      },
+      {
+        "pattern": "[linux_openssh_8.x] Partial extraction: Dec 10 07:27:50 LabSZ sshd[24235]: pam_unix(sshd:auth): auth",
+        "count": 1,
+        "sample": "Dec 10 07:27:50 LabSZ sshd[24235]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid="
+      }
+    ]
+  },
+  "Loghub Linux Syslog 2k": {
+    "total_records": 2000,
+    "full_parsed": 489,
+    "partial_parsed": 483,
+    "unparsed": 1028,
+    "emitted_ocsf": 2000,
+    "parsed_pct": 24.45,
+    "partial_pct": 24.15,
+    "unparsed_pct": 51.4,
+    "emitted_pct": 100.0,
+    "top_misses": [
+      {
+        "pattern": "[UNPARSED] Signature prefix: Jun 30 20",
+        "count": 46,
+        "sample": "Jun 30 20:53:04 combo klogind[19272]: Authentication failed from 163.27.187.39 (163.27.187.39): Perm"
+      },
+      {
+        "pattern": "[UNPARSED] Signature prefix: Jul  9 12",
+        "count": 41,
+        "sample": "Jul  9 12:16:49 combo ftpd[23140]: connection from 211.167.68.59 () at Sat Jul  9 12:16:49 2005"
+      },
+      {
+        "pattern": "[UNPARSED] Signature prefix: Jul 17 06",
+        "count": 30,
+        "sample": "Jul 17 06:13:37 combo ftpd[23574]: connection from 83.116.207.11 (aml-sfh-3310b.adsl.wanadoo.nl) at "
+      },
+      {
+        "pattern": "[UNPARSED] Signature prefix: Jul 24 02",
+        "count": 25,
+        "sample": "Jul 24 02:38:22 combo ftpd[16773]: connection from 84.102.20.2 () at Sun Jul 24 02:38:22 2005"
+      },
+      {
+        "pattern": "[UNPARSED] Signature prefix: Jul 25 23",
+        "count": 25,
+        "sample": "Jul 25 23:23:13 combo ftpd[26463]: getpeername (ftpd): Transport endpoint is not connected"
+      },
+      {
+        "pattern": "[UNPARSED] Signature prefix: Jun 22 13",
+        "count": 23,
+        "sample": "Jun 22 13:16:30 combo ftpd[17886]: connection from 210.245.165.136 () at Wed Jun 22 13:16:30 2005"
+      },
+      {
+        "pattern": "[UNPARSED] Signature prefix: Jun 29 03",
+        "count": 23,
+        "sample": "Jun 29 03:22:22 combo ftpd[13262]: connection from 61.74.96.178 () at Wed Jun 29 03:22:22 2005"
+      },
+      {
+        "pattern": "[UNPARSED] Signature prefix: Jun 29 10",
+        "count": 23,
+        "sample": "Jun 29 10:48:01 combo ftpd[15547]: connection from 208.62.55.75 () at Wed Jun 29 10:48:01 2005"
+      },
+      {
+        "pattern": "[UNPARSED] Signature prefix: Jul  1 07",
+        "count": 23,
+        "sample": "Jul  1 07:57:30 combo ftpd[21952]: connection from 202.82.200.188 () at Fri Jul  1 07:57:30 2005"
+      },
+      {
+        "pattern": "[UNPARSED] Signature prefix: Jul  3 10",
+        "count": 23,
+        "sample": "Jul  3 10:05:25 combo ftpd[32069]: connection from 203.101.45.59 (dsl-Chn-static-059.45.101.203.touc"
+      }
+    ]
+  },
+  "Loghub Apache Web 2k": {
+    "total_records": 2000,
+    "full_parsed": 2000,
+    "partial_parsed": 0,
+    "unparsed": 0,
+    "emitted_ocsf": 2000,
+    "parsed_pct": 100.0,
+    "partial_pct": 0.0,
+    "unparsed_pct": 0.0,
+    "emitted_pct": 100.0,
+    "top_misses": []
+  },
+  "Loghub Proxifier 2k": {
+    "total_records": 2000,
+    "full_parsed": 1214,
+    "partial_parsed": 0,
+    "unparsed": 786,
+    "emitted_ocsf": 2000,
+    "parsed_pct": 60.7,
+    "partial_pct": 0.0,
+    "unparsed_pct": 39.3,
+    "emitted_pct": 100.0,
+    "top_misses": [
+      {
+        "pattern": "[UNPARSED] Signature prefix: [07.26 15",
+        "count": 119,
+        "sample": "[07.26 15:04:20] chrome.exe *64 - long.open.weixin.qq.com:443 close, 1910 bytes (1.86 KB) sent, 276 "
+      },
+      {
+        "pattern": "[UNPARSED] Signature prefix: [07.26 17",
+        "count": 111,
+        "sample": "[07.26 17:03:31] chrome.exe *64 - clients4.google.com:443 open through proxy proxy.cse.cuhk.edu.hk:5"
+      },
+      {
+        "pattern": "[UNPARSED] Signature prefix: [07.26 14",
+        "count": 107,
+        "sample": "[07.26 14:03:57] chrome.exe *64 - notifications.google.com:443 close, 470 bytes sent, 4856 bytes (4."
+      },
+      {
+        "pattern": "[UNPARSED] Signature prefix: [07.26 13",
+        "count": 90,
+        "sample": "[07.26 13:30:34] chrome.exe *64 - www.baidu.com:80 open through proxy proxy.cse.cuhk.edu.hk:5070 HTT"
+      },
+      {
+        "pattern": "[UNPARSED] Signature prefix: [07.26 16",
+        "count": 53,
+        "sample": "[07.26 16:06:32] chrome.exe *64 - www.evernote.com:443 open through proxy proxy.cse.cuhk.edu.hk:5070"
+      },
+      {
+        "pattern": "[UNPARSED] Signature prefix: [07.27 10",
+        "count": 51,
+        "sample": "[07.27 10:02:34] chrome.exe *64 - notifications.google.com:443 open through proxy proxy.cse.cuhk.edu"
+      },
+      {
+        "pattern": "[UNPARSED] Signature prefix: [07.26 21",
+        "count": 50,
+        "sample": "[07.26 21:18:02] chrome.exe *64 - clients5.google.com:443 close, 465 bytes sent, 4790 bytes (4.67 KB"
+      },
+      {
+        "pattern": "[UNPARSED] Signature prefix: [07.27 05",
+        "count": 36,
+        "sample": "[07.27 05:02:32] chrome.exe *64 - qa.sockets.stackexchange.com:443 close, 4755 bytes (4.64 KB) sent,"
+      },
+      {
+        "pattern": "[UNPARSED] Signature prefix: [07.26 18",
+        "count": 28,
+        "sample": "[07.26 18:04:49] chrome.exe *64 - c.trello.com:443 open through proxy proxy.cse.cuhk.edu.hk:5070 HTT"
+      },
+      {
+        "pattern": "[UNPARSED] Signature prefix: [07.27 09",
+        "count": 25,
+        "sample": "[07.27 09:00:14] chrome.exe *64 - clientservices.googleapis.com:443 open through proxy proxy.cse.cuh"
+      }
+    ]
+  },
+  "Loghub HDFS 2k": {
+    "total_records": 2000,
+    "full_parsed": 2000,
+    "partial_parsed": 0,
+    "unparsed": 0,
+    "emitted_ocsf": 2000,
+    "parsed_pct": 100.0,
+    "partial_pct": 0.0,
+    "unparsed_pct": 0.0,
+    "emitted_pct": 100.0,
+    "top_misses": []
+  }
+}

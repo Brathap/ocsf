@@ -1,0 +1,2 @@
+<34>1 2026-10-05T09:30:00.123Z edge-firewall.corp.net myapp 1234 ID47 [exampleSDID@32473 iut="3" eventSource="Application" eventID="1011"] An application audit message
+<165>1 2026-10-05T09:30:01.456Z gateway.dmz.internal vpn-service 5432 AUTH_FAIL [origin ip="203.0.113.12"] Multi-factor auth timed out for operator

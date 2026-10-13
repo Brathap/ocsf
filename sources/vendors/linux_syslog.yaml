@@ -1,0 +1,28 @@
+# Linux Syslog & Kernel Generic Pack
+metadata:
+  vendor: "Linux"
+  product: "Syslog"
+  version: "RFC3164"
+  priority: 105
+  description: "Generic Linux daemon, kernel, and pam authentication messages (sshd, su, cron, kernel, logrotate)."
+
+detection:
+  match_regex:
+    - "(?:sshd\\(pam_unix\\)|CRON\\[|kernel:|su\\(pam_unix\\)|logrotate:)"
+    - "\\bauthentication failure;"
+    - "\\bcheck pass; user unknown"
+    - "\\bsession (?:opened|closed) for user\\b"
+
+parser:
+  type: "regex"
+  pattern: "(?:(?P<daemon>\\w+)(?:\\([\\w_]+\\))?(?:\\[\\d+\\])?:\\s+)?(?P<msg_content>.*?)(?:rhost=(?P<rhost>[0-9a-zA-Z.-]+))?(?:\\s+user=(?P<user>\\w+))?$"
+
+ocsf:
+  class_uid: 3002
+  category_name: "Identity & Access Management"
+  activity_name: "System Event"
+
+mappings:
+  "src_endpoint.ip": "rhost"
+  "user.name": "user"
+  "activity_name": "msg_content"

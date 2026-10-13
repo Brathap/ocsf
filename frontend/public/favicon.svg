@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="shieldMain" x1="12" y1="4" x2="52" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="45%" stop-color="#1d4ed8" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="borderGleam" x1="10" y1="4" x2="54" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#60a5fa" />
+      <stop offset="50%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#1e3a8a" />
+    </linearGradient>
+    <linearGradient id="facetHighlight" x1="32" y1="6" x2="54" y2="38" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.0" />
+    </linearGradient>
+  </defs>
+  <path d="M32 4L54 13V28C54 43 44 54 32 59C20 54 10 43 10 28V13L32 4Z" fill="url(#shieldMain)" stroke="url(#borderGleam)" stroke-width="2.5" stroke-linejoin="round" />
+  <path d="M32 4L54 13V28C54 43 44 54 32 59V4Z" fill="url(#facetHighlight)" />
+  <path d="M17 23H25L32 30H43" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M14 32H45" stroke="#ffffff" stroke-width="3" stroke-linecap="round" />
+  <path d="M17 41H25L32 34H43" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+  <circle cx="17" cy="23" r="1.8" fill="#38bdf8" />
+  <circle cx="14" cy="32" r="2.2" fill="#ffffff" />
+  <circle cx="17" cy="41" r="1.8" fill="#38bdf8" />
+  <polygon points="32,26 38,32 32,38 26,32" fill="#0284c7" stroke="#ffffff" stroke-width="1.5" />
+  <circle cx="32" cy="32" r="2" fill="#ffffff" />
+  <circle cx="45" cy="32" r="2.5" fill="#38bdf8" />
+</svg>

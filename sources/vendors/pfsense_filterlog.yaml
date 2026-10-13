@@ -1,0 +1,29 @@
+# pfSense Filterlog CSV Packet Filter Pack
+metadata:
+  vendor: "Netgate"
+  product: "pfSense filterlog"
+  version: "2.x"
+  priority: 125
+  description: "pfSense FreeBSD packet filter filterlog CSV format."
+
+detection:
+  match_regex:
+    - "filterlog(?:\\[\\d+\\])?:\\s+\\d+,\\d+,.*,(?:match|block|pass),"
+    - "filterlog:\\s+\\d+,.*,(?:in|out),"
+
+parser:
+  type: "regex"
+  pattern: "filterlog(?:\\[\\d+\\])?:\\s+(?P<rule_num>\\d+),(?P<sub_rule_num>\\d*),(?P<anchor>\\w*),(?P<tracker>\\d+),(?P<real_interface>\\w+),(?P<reason>\\w+),(?P<action>\\w+),(?P<direction>\\w+),(?P<ip_version>4|6),(?P<tos>\\w*),(?P<ecn>\\w*),(?P<ttl>\\d+),(?P<id>\\d+),(?P<offset>\\d+),(?P<flags>\\w+),(?P<proto_id>\\d+),(?P<protocol>\\w+),(?P<length>\\d+),(?P<src_ip>[0-9a-fA-F.:]+),(?P<dst_ip>[0-9a-fA-F.:]+),(?P<src_port>\\d+),(?P<dst_port>\\d+)"
+
+ocsf:
+  class_uid: 4001
+  category_name: "Network Activity"
+  activity_name: "Firewall Filter"
+
+mappings:
+  "src_endpoint.ip": "src_ip"
+  "src_endpoint.port": "src_port"
+  "dst_endpoint.ip": "dst_ip"
+  "dst_endpoint.port": "dst_port"
+  "connection_info.protocol_name": "protocol"
+  "activity_name": "action"

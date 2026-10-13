@@ -1,0 +1,29 @@
+# Generic LEEF (Log Event Extended Format) Standard Pack
+metadata:
+  vendor: "Generic"
+  product: "LEEF Standard"
+  version: "1.0/2.0"
+  priority: 115
+  description: "Standard LEEF security event format (IBM QRadar interoperability)."
+
+detection:
+  match_regex:
+    - "LEEF:1\\.0\\|"
+    - "LEEF:2\\.0\\|"
+    - "\\bLEEF:\\d\\."
+
+parser:
+  type: "leef"
+
+ocsf:
+  class_uid: 2001
+  category_name: "Security Finding"
+  activity_name: "Security Telemetry"
+
+mappings:
+  "src_endpoint.ip": "src"
+  "src_endpoint.port": "srcPort"
+  "dst_endpoint.ip": "dst"
+  "dst_endpoint.port": "dstPort"
+  "connection_info.protocol_name": "proto"
+  "activity_name": "devAction"

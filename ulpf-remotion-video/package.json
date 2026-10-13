@@ -1,0 +1,21 @@
+{
+  "name": "ulpf-remotion-video",
+  "version": "1.0.0",
+  "description": "ULPF Sentinel - Cinematic 30s Product Explainer Video in Remotion",
+  "scripts": {
+    "dev": "remotion preview",
+    "preview": "remotion preview",
+    "build": "remotion render ULPFSentinelDemo out/ulpf_sentinel_showcase.mp4"
+  },
+  "dependencies": {
+    "@remotion/shapes": "^4.0.0",
+    "lucide-react": "^1.16.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "remotion": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "typescript": "^5.0.0"
+  }
+}

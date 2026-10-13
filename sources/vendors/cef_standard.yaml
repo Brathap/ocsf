@@ -1,0 +1,28 @@
+# Common Event Format (CEF) WAF / IDS Standard Pack
+metadata:
+  vendor: "ArcSight"
+  product: "CEF Standard"
+  version: "1.0"
+  priority: 120
+  description: "Standard CEF security finding parser for Imperva, Checkpoint, and Palo Alto."
+
+detection:
+  match_regex:
+    - "CEF:0\\|"
+    - "\\bCEF:\\d\\|"
+
+parser:
+  type: "cef"
+
+ocsf:
+  class_uid: 2001
+  category_name: "Security Finding"
+  activity_name: "WAF Security Inspection"
+
+mappings:
+  "src_endpoint.ip": "src"
+  "src_endpoint.port": "spt"
+  "dst_endpoint.ip": "dst"
+  "dst_endpoint.port": "dpt"
+  "finding.title": "name"
+  "severity": "severity"

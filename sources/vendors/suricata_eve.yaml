@@ -1,0 +1,28 @@
+# Suricata EVE JSON IDS/IPS Pack
+metadata:
+  vendor: "OISF"
+  product: "Suricata EVE"
+  version: "6.x/7.x"
+  priority: 145
+  description: "Suricata Extensible Event Format (EVE) JSON network security monitoring events."
+
+detection:
+  match_regex:
+    - "\"event_type\":\\s*\"(?:alert|flow|dns|http|tls|fileinfo)\""
+
+parser:
+  type: "json"
+
+ocsf:
+  class_uid: 2001
+  category_name: "Security Finding"
+  activity_name: "Intrusion Detection Alert"
+
+mappings:
+  "src_endpoint.ip": "src_ip"
+  "src_endpoint.port": "src_port"
+  "dst_endpoint.ip": "dest_ip"
+  "dst_endpoint.port": "dest_port"
+  "connection_info.protocol_name": "proto"
+  "activity_name": "event_type"
+  "time": "timestamp"

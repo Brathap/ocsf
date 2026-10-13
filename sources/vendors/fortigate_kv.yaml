@@ -1,0 +1,33 @@
+# FortiGate FortiOS UTM Firewall Pack
+metadata:
+  vendor: "Fortinet"
+  product: "FortiGate"
+  version: "7.x"
+  priority: 140
+  description: "FortiGate key-value syslog telemetry with nanosecond/microsecond eventtime support."
+
+detection:
+  match_regex:
+    - "type=\"?traffic\"?\\s+devname="
+    - "devname=\"?FG"
+    - "fortigate"
+    - "devid=\"?FG"
+
+parser:
+  type: "kv"
+
+ocsf:
+  class_uid: 4001
+  category_name: "Network Activity"
+  activity_name: "Network Traffic"
+
+mappings:
+  "src_endpoint.ip": "srcip"
+  "src_endpoint.port": "srcport"
+  "dst_endpoint.ip": "dstip"
+  "dst_endpoint.port": "dstport"
+  "connection_info.protocol_name": "proto"
+  "activity_name": "action"
+  "device.name": "devname"
+  "device.id": "devid"
+  "time": "eventtime"

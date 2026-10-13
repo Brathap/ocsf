@@ -1,0 +1,33 @@
+services:
+  ulpf-engine:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ulpf-core
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+      - "5173:5173"
+      - "6514:6514"
+      - "5140:5140/udp"
+      - "514:514/udp"
+      - "5514:5514/udp"
+    volumes:
+      - ./backend/threat_intel.csv:/app/backend/threat_intel.csv:rw
+      - ./backend/threat_intel.csv.manifest.json:/app/backend/threat_intel.csv.manifest.json:rw
+      - ./storage:/app/storage:rw
+      - ./vector:/app/vector:rw
+      - vector-data:/tmp/vector
+    environment:
+      - PYTHONUNBUFFERED=1
+      - ENVIRONMENT=production
+    networks:
+      - ulpf-isolated-net
+
+networks:
+  ulpf-isolated-net:
+    driver: bridge
+    internal: true # Air-gapped: Prohibits external internet egress for true zero-trust isolation
+
+volumes:
+  vector-data:

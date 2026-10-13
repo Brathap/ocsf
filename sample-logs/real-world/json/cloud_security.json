@@ -1,0 +1,2 @@
+{"timestamp":"2026-10-05T09:45:00Z","event_id":"AWS-GUARDDUTY-101","severity":7.5,"service":"GuardDuty","action":"PortScan","actor":{"ip":"203.0.113.77","country":"Unknown"},"target":{"ip":"10.0.1.20","port":22},"protocol":"tcp","alert_desc":"SSH port sweep detected"}
+{"timestamp":"2026-10-05T09:45:10Z","event_id":"KUBE-AUDIT-902","severity":3,"service":"Kubernetes","action":"create","actor":{"user":"kube-admin","namespace":"kube-system"},"target":{"resource":"pods","name":"network-monitor"},"response_status":"Success"}

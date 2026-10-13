@@ -1,0 +1,30 @@
+# Proxifier Client Network Proxy Pack
+metadata:
+  vendor: "Initex"
+  product: "Proxifier"
+  version: "3.x/4.x"
+  priority: 110
+  description: "Proxifier client proxy tunnel connection events."
+
+detection:
+  match_regex:
+    - "^\\[\\d+\\.\\d+\\s+\\d+:\\d+:\\d+\\]\\s+\\S+\\s+-\\s+\\S+\\s+(?:open|close)\\s+through\\s+proxy"
+    - "^\\[\\d+\\.\\d+\\s+\\d+:\\d+:\\d+\\]\\s+\\S+\\s+-\\s+\\S+\\s+close,"
+
+parser:
+  type: "regex"
+  pattern: "^\\[(?P<log_time>[^\\]]+)\\]\\s+(?P<app_name>\\S+)\\s+-\\s+(?P<target_host>[0-9a-zA-Z.-]+):(?P<target_port>\\d+)\\s+(?P<action>open|close)(?:\\s+through\\s+proxy\\s+(?P<proxy_host>[0-9a-zA-Z.-]+):(?P<proxy_port>\\d+))?(?:,\\s+(?P<details>.*))?"
+
+ocsf:
+  class_uid: 4001
+  category_name: "Network Activity"
+  activity_name: "Proxy Tunnel"
+
+mappings:
+  "dst_endpoint.ip": "target_host"
+  "dst_endpoint.port": "target_port"
+  "src_endpoint.ip": "proxy_host"
+  "src_endpoint.port": "proxy_port"
+  "process.name": "app_name"
+  "activity_name": "action"
+  "time": "log_time"

@@ -1,0 +1,19 @@
+# Device 1: AegisCore KV Sensor (Key-Value)
+2026-10-06T10:00:01Z dev=AegisCore-KV01 s_ip=192.0.2.10 s_port=49152 d_ip=198.51.100.20 d_port=443 proto=TCP action=DENY rule=R101 reason="Port scan detected"
+2026-10-06T10:00:02Z dev=AegisCore-KV01 s_ip=192.0.2.11 s_port=51200 d_ip=198.51.100.25 d_port=80 proto=TCP action=ALLOW rule=R102 reason="Standard egress"
+
+# Device 2: CyberMesh Telemetry Probe (JSON)
+{"timestamp":"2026-10-06T10:00:03Z","probe_id":"CyberMesh-JSON02","client_ip":"198.51.100.45","client_port":53112,"server_ip":"203.0.113.88","server_port":22,"protocol":"TCP","event":"SSH_BRUTE_FORCE","verdict":"BLOCKED"}
+{"timestamp":"2026-10-06T10:00:04Z","probe_id":"CyberMesh-JSON02","client_ip":"198.51.100.46","client_port":53113,"server_ip":"203.0.113.88","server_port":80,"protocol":"TCP","event":"HTTP_FLOOD","verdict":"RATE_LIMITED"}
+
+# Device 3: IronGate Boundary Monitor (Pipe-Delimited)
+2026-10-06T10:00:05Z|IronGate-PIPE03|192.0.2.99|40123|203.0.113.150|8080|TCP|SQL_INJECTION_ATTEMPT|DROP|SEV_HIGH
+2026-10-06T10:00:06Z|IronGate-PIPE03|192.0.2.105|40124|203.0.113.150|443|TCP|TLS_ANOMALY|FLAG|SEV_MED
+
+# Device 4: ShadowVault Flow Log (CSV-Delimited)
+2026-10-06T10:00:07Z,ShadowVault-CSV04,198.51.100.200,60123,192.0.2.50,443,TCP,ALLOW,PACKET_FORWARD,BYTES=1420
+2026-10-06T10:00:08Z,ShadowVault-CSV04,198.51.100.201,60124,192.0.2.50,80,TCP,DROP,UNAUTHORIZED_PORT,BYTES=64
+
+# Device 5: VoidShield Perimeter Guard (Bracketed Syslog)
+[2026-10-06 10:00:09] [VoidShield-BRACKET05] [ALERT] [src=203.0.113.250:58100] [dst=192.0.2.1:53] [proto=UDP] [status=BLOCKED] [msg=DNS_TUNNELING_SUSPECTED]
+[2026-10-06 10:00:10] [VoidShield-BRACKET05] [INFO] [src=203.0.113.251:58101] [dst=192.0.2.1:53] [proto=UDP] [status=PERMITTED] [msg=STANDARD_QUERY]
